@@ -1,0 +1,55 @@
+@use "tokens" as *;
+@use "breakpoints" as *;
+
+// Aplica un gradiente azul -> dorado, base del lenguaje visual.
+@mixin degradado-marca($angulo: 135deg) {
+  background-image: linear-gradient($angulo, $azul 0%, $azul-profundo 55%, $azul-oscuro 100%);
+}
+
+// Acento dorado: barra, subrayado o filete decorativo.
+@mixin filete-dorado($ancho: 2px, $ancho-total: 56px) {
+  width: $ancho-total;
+  height: $ancho;
+  background: linear-gradient(90deg, $dorado, $dorado-claro);
+  border-radius: $radio-pill;
+}
+
+// Botón base. Alto mínimo 48px para dedo.
+@mixin boton-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: $sans;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: $radio-pill;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color $media $ease, color $media $ease,
+    border-color $media $ease, transform $rapida $ease,
+    box-shadow $media $ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Superficie de tarjeta compartida.
+@mixin superficie {
+  background: $blanco;
+  border: 1px solid $borde;
+  border-radius: $radio-lg;
+  box-shadow: $sombra-sm;
+}
+
+// Bloque de código con scroll horizontal controlado.
+@mixin tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}

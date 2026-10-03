@@ -1,0 +1,247 @@
+// Detalle de producto. Mobile-first: columna unica, y el
+// CTA sticky solo aparece en movil.
+
+.detalle {
+  padding-bottom: 0;
+}
+
+.miga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding-block: 1.25rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+
+  a {
+    color: var(--azul-oscuro);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  [aria-current='page'] {
+    color: var(--texto);
+  }
+}
+
+.detalle__grid {
+  display: grid;
+  gap: 1.75rem;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+// ---------- Galeria ----------
+.galeria__placeholder {
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-sm);
+}
+
+.galeria__principal {
+  width: 100%;
+  border-radius: var(--radio-lg);
+  object-fit: cover;
+  box-shadow: var(--sombra-sm);
+}
+
+// ---------- Info ----------
+.info {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.info__tipo {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.info__nombre {
+  color: var(--texto);
+}
+
+.info__precio {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--dorado);
+  letter-spacing: 0.02em;
+}
+
+.info__precio-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+}
+
+.info__aviso {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  color: var(--azul-oscuro);
+  background: var(--azul-claro);
+  border-left: 3px solid var(--azul);
+  border-radius: var(--radio-sm);
+}
+
+.info__desc {
+  max-width: 55ch;
+}
+
+// Datos como filas apiladas: una <table> desborda en movil
+.datos {
+  display: grid;
+  gap: 0;
+  margin: 0.35rem 0;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--blanco);
+}
+
+.datos__fila {
+  display: grid;
+  grid-template-columns: minmax(96px, 34%) 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+
+  // Filete entre filas
+  & + .datos__fila {
+    border-top: 1px solid var(--borde);
+  }
+}
+
+.datos__fila dt {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  align-self: center;
+}
+
+.datos__fila dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--texto);
+  align-self: center;
+}
+
+.info__nota {
+  max-width: 52ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--texto-suave);
+}
+
+.info__cta {
+  width: 100%;
+  justify-content: center;
+  gap: 0.55rem;
+
+  svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+.info__volver {
+  width: 100%;
+  justify-content: center;
+}
+
+// ---------- CTA sticky (solo movil) ----------
+.sticky-cta {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.75rem var(--gutter)
+    calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--borde);
+  box-shadow: 0 -6px 24px rgba(42, 81, 100, 0.12);
+}
+
+.sticky-cta__info {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.sticky-cta__nombre {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--texto);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sticky-cta__precio {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--dorado);
+}
+
+.sticky-cta__btn {
+  flex: none;
+  gap: 0.45rem;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.contenedor-carga {
+  padding-block: 4rem;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+// ---------- Escritorio ----------
+@media (min-width: 992px) {
+  .detalle__grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .info__cta,
+  .info__volver {
+    width: auto;
+    justify-self: start;
+  }
+
+  .info__cta {
+    min-width: 280px;
+  }
+
+  // En escritorio el CTA sticky no hace falta:
+  // los botones principales ya estan a la vista.
+  .sticky-cta {
+    display: none;
+  }
+}

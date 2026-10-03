@@ -1,0 +1,391 @@
+// Header fijo + drawer lateral. Mobile-first.
+:host {
+  display: block;
+}
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-header);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--borde);
+  transition: background-color 220ms ease, box-shadow 220ms ease,
+    border-color 220ms ease;
+  // La muesca del iPhone: el header arranca bajo la barra
+  // de estado sin dejar hueco.
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 4px 20px rgba(42, 81, 100, 0.1);
+  border-bottom-color: transparent;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--header-h);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex: none;
+
+  img {
+    width: auto;
+    height: 40px;
+    object-fit: contain;
+  }
+}
+
+.header__nav {
+  display: none;
+}
+
+.header__acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.header__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--azul);
+  border-radius: var(--radio-pill);
+  transition: background-color 180ms ease;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+  }
+
+  &:hover {
+    background: var(--azul-oscuro);
+  }
+}
+
+.header__wa-texto {
+  display: none;
+}
+
+.header__burguer {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-pill);
+  transition: background-color 160ms ease;
+
+  &:hover {
+    background: rgba(85, 139, 164, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+  }
+}
+
+.header__burguer-lines {
+  display: grid;
+  gap: 5px;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--texto);
+    border-radius: 2px;
+    transition: transform 220ms ease, opacity 160ms ease;
+    transform-origin: center;
+  }
+}
+
+.header__burguer.is-open .header__burguer-lines span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header__burguer.is-open .header__burguer-lines span:nth-child(2) {
+  opacity: 0;
+}
+
+.header__burguer.is-open .header__burguer-lines span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+// ---------- Overlay ----------
+.drawer__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-drawer) - 1);
+  background: rgba(31, 45, 51, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 280ms ease, visibility 280ms ease;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ---------- Drawer ----------
+.drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  width: min(320px, 88vw);
+  background: var(--blanco);
+  box-shadow: -12px 0 40px rgba(42, 81, 100, 0.18);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 300ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 300ms;
+  // El scroll del drawer no debe escapar al body
+  overscroll-behavior: contain;
+  overflow-y: auto;
+
+  &.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.drawer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 0.75rem) 1rem 0.75rem;
+  border-bottom: 1px solid var(--borde);
+}
+
+.drawer__titulo {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.drawer__cerrar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-pill);
+  color: var(--texto);
+  transition: background-color 160ms ease;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &:hover {
+    background: rgba(85, 139, 164, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+  }
+}
+
+.drawer__nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.75rem 0;
+}
+
+.drawer__link {
+  display: flex;
+  align-items: center;
+  // Zona tactil generosa
+  min-height: 56px;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--texto);
+  border-left: 3px solid transparent;
+  transition: color 160ms ease, border-color 160ms ease,
+    background-color 160ms ease;
+
+  &.is-active {
+    color: var(--azul-oscuro);
+    border-left-color: var(--dorado);
+    background: var(--azul-claro);
+  }
+
+  &:hover {
+    color: var(--azul-oscuro);
+  }
+}
+
+.drawer__pie {
+  padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--borde);
+  background: var(--crema);
+}
+
+.drawer__wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--azul);
+  border-radius: var(--radio-pill);
+  transition: background-color 180ms ease;
+
+  svg {
+    width: 19px;
+    height: 19px;
+    flex: none;
+  }
+
+  &:hover {
+    background: var(--azul-oscuro);
+  }
+}
+
+.drawer__contacto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  font-size: 0.8125rem;
+  color: var(--texto-suave);
+}
+
+.drawer__redes {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.drawer__red {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pill);
+  color: var(--texto);
+  transition: color 160ms ease, border-color 160ms ease,
+    background-color 160ms ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    color: var(--azul-oscuro);
+    border-color: var(--azul);
+    background: var(--azul-claro);
+  }
+}
+
+// ---------- Tablet ----------
+@media (min-width: 768px) {
+  .header__wa-texto {
+    display: inline;
+  }
+
+  .header__logo img {
+    height: 48px;
+  }
+}
+
+// ---------- Escritorio: nav en linea ----------
+@media (min-width: 992px) {
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2.25rem);
+  }
+
+  .header__link {
+    position: relative;
+    padding: 0.4rem 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto);
+    transition: color 160ms ease;
+
+    // Filete dorado animado
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--dorado);
+      border-radius: var(--radio-pill);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 220ms ease;
+    }
+
+    &:hover,
+    &.is-active {
+      color: var(--azul-oscuro);
+    }
+
+    &:hover::after,
+    &.is-active::after {
+      transform: scaleX(1);
+    }
+  }
+
+  // La hamburguesa y el drawer no hacen falta en escritorio
+  .header__burguer,
+  .drawer,
+  .drawer__overlay {
+    display: none;
+  }
+
+  .header__wa {
+    margin-left: 0.5rem;
+    min-height: 44px;
+  }
+}
+
+// ---------- Sin animaciones ----------
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer__overlay,
+  .header__burguer-lines span {
+    transition-duration: 0.01ms !important;
+  }
+}

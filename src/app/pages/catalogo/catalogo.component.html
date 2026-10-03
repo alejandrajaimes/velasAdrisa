@@ -1,0 +1,109 @@
+<section class="page-head">
+  <div class="container page-head__inner">
+    <nav class="miga" aria-label="Ruta de navegacion">
+      <a routerLink="/">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Catalogo</span>
+    </nav>
+
+    <h1 class="t-h2">Catalogo</h1>
+    <p class="t-lead">
+      Velas seleccionadas para darle caracter a tu hogar.
+      Escribe por WhatsApp y te ayudamos a combinar.
+    </p>
+  </div>
+</section>
+
+<!-- Filtros por tipo de vela: scroll horizontal con snap en movil -->
+<section class="filtros" aria-label="Filtrar por tipo de vela">
+  <div class="filtros__track">
+    <button
+      type="button"
+      class="chip"
+      [class.is-active]="esActiva('todos')"
+      [attr.aria-pressed]="esActiva('todos')"
+      (click)="filtrar('todos')">
+      Todos
+    </button>
+
+    @for (tipo of tipos; track tipo.id) {
+      <button
+        type="button"
+        class="chip"
+        [class.is-active]="esActiva(tipo.id)"
+        [attr.aria-pressed]="esActiva(tipo.id)"
+        (click)="filtrar(tipo.id)">
+        {{ tipo.nombre }}
+      </button>
+    }
+  </div>
+</section>
+
+<section class="section section--crema">
+  <div class="container">
+    @if (todos.length === 0) {
+      <!-- Estado vacio: el catalogo real aun no esta cargado -->
+      <div class="vacio">
+        <div class="vacio__media">
+          <app-placeholder-img
+            alt="Catalogo de Adrisa en preparacion"
+            aspecto="16 / 10" />
+        </div>
+
+        <div class="vacio__texto">
+          <span class="t-eyebrow">Muy pronto</span>
+          <h2 class="t-h3">Estamos preparando el catalogo</h2>
+          <p class="t-lead">
+            Estamos seleccionando cada vela con mucho cuidado:
+            ceras, aromas, mechas y precios finales. Mientras tanto,
+            puedes consultarnos directamente por WhatsApp y te
+            ayudamos con lo que estes buscando.
+          </p>
+
+          <div class="vacio__acciones">
+            <a
+              class="btn btn--dorado"
+              [href]="waLink()"
+              target="_blank"
+              rel="noopener noreferrer">
+              Consultar por WhatsApp
+            </a>
+            <a class="btn btn--outline" routerLink="/experiencia">
+              Ver experiencia Adrisa
+            </a>
+          </div>
+        </div>
+      </div>
+    } @else if (filtrados().length === 0) {
+      <div class="sin-resultados">
+        <h2 class="t-h3">No hay velas en este tipo por ahora</h2>
+        <p class="t-lead">
+          Estamos llenando el catalogo poco a poco. Pregunta por
+          WhatsApp si ya tienes algo en mente.
+        </p>
+        <button type="button" class="btn" (click)="filtrar('todos')">
+          Ver todo el catalogo
+        </button>
+      </div>
+    } @else {
+      <p class="contador" role="status">
+        {{ total() }} {{ total() === 1 ? 'vela' : 'velas' }}
+        @if (hayFiltro()) {
+          <span> en este tipo</span>
+          <button
+            type="button"
+            class="contador__limpiar"
+            (click)="filtrar('todos')">
+            Ver todos
+          </button>
+        }
+      </p>
+
+      <div class="grid catalogo-grid">
+        @for (p of filtrados(); track p.id) {
+          <app-product-card [producto]="p" />
+        }
+      </div>
+    }
+  </div>
+</section>

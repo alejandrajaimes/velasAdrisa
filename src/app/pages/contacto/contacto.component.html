@@ -1,0 +1,242 @@
+<section class="page-head">
+  <div class="container page-head__inner">
+    <nav class="miga" aria-label="Ruta de navegacion">
+      <a routerLink="/">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Contacto</span>
+    </nav>
+
+    <h1 class="t-h2">Contacto</h1>
+    <p class="t-lead">
+      Escríbenos y te respondemos por WhatsApp. Estamos para
+      ayudarte a encontrar las piezas indicadas.
+    </p>
+  </div>
+</section>
+
+<section class="section section--crema">
+  <div class="container contacto__grid">
+    <!-- Formulario -->
+    <div class="formulario">
+      <span class="t-eyebrow">Escríbenos</span>
+      <h2 class="t-h3">Cuéntanos qué buscas</h2>
+
+      @if (enviado()) {
+        <div class="ok" role="status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          <p>
+            Abrimos WhatsApp con tu mensaje. Si no se abrió,
+            copia lo que escribiste y envíanoslo directamente.
+          </p>
+        </div>
+      }
+
+      <form
+        class="form"
+        (ngSubmit)="enviar()"
+        #formEl
+        novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre *</label>
+          <input
+            id="nombre"
+            class="campo__control"
+            type="text"
+            name="nombre"
+            autocomplete="name"
+            placeholder="Tu nombre"
+            [(ngModel)]="modelo.nombre"
+            [class.is-invalid]="errores()['nombre']"
+            required />
+          @if (errores()['nombre']) {
+            <p class="campo__error" role="alert">
+              {{ errores()['nombre'] }}
+            </p>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="email">Correo electronico *</label>
+          <input
+            id="email"
+            class="campo__control"
+            type="email"
+            name="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="tucorreo@ejemplo.com"
+            [(ngModel)]="modelo.email"
+            [class.is-invalid]="errores()['email']"
+            required />
+          @if (errores()['email']) {
+            <p class="campo__error" role="alert">
+              {{ errores()['email'] }}
+            </p>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="telefono">Telefono</label>
+          <input
+            id="telefono"
+            class="campo__control"
+            type="tel"
+            name="telefono"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="300 000 0000"
+            [(ngModel)]="modelo.telefono"
+            [class.is-invalid]="errores()['telefono']" />
+          @if (errores()['telefono']) {
+            <p class="campo__error" role="alert">
+              {{ errores()['telefono'] }}
+            </p>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="ciudad">Ciudad</label>
+          <select
+            id="ciudad"
+            class="campo__control"
+            name="ciudad"
+            [(ngModel)]="modelo.ciudad">
+            <option value="">Selecciona tu ciudad</option>
+            @for (s of sucursales; track s.ciudad) {
+              <option [value]="s.ciudad">{{ s.ciudad }}</option>
+            }
+            <option value="Otra ciudad">Otra ciudad</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Mensaje *</label>
+          <textarea
+            id="mensaje"
+            class="campo__control"
+            name="mensaje"
+            rows="5"
+            placeholder="Cuentanos que buscas, que ambiente quieres transformar, o cualquier duda que tengas."
+            [(ngModel)]="modelo.mensaje"
+            [class.is-invalid]="errores()['mensaje']"
+            required></textarea>
+          @if (errores()['mensaje']) {
+            <p class="campo__error" role="alert">
+              {{ errores()['mensaje'] }}
+            </p>
+          }
+        </div>
+
+        <p class="form__nota">
+          Al enviar se abrirá WhatsApp con tu mensaje. No se
+          guarda ningún dato en este sitio.
+        </p>
+
+        <button class="btn btn--dorado btn--bloque" type="submit">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <use href="#icon-wa" />
+          </svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+    </div>
+
+    <!-- Datos -->
+    <aside class="datos">
+      <div class="datos__bloque">
+        <h2 class="footer__titulo como-titulo">Sucursales</h2>
+
+        <ul class="sucursales">
+          @for (s of sucursales; track s.ciudad) {
+            <li class="sucursal">
+              <h3 class="sucursal__ciudad">{{ s.ciudad }}</h3>
+
+              <p class="sucursal__dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <use href="#icon-pin" />
+                </svg>
+                <span>
+                  <strong>Dirección</strong><br />
+                  {{ s.direccion }}
+                </span>
+              </p>
+
+              <a class="sucursal__dato" href="tel:+57{{ s.celular }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <use href="#icon-wa" />
+                </svg>
+                <span>
+                  <strong>Celular</strong><br />
+                  {{ s.celular }}
+                </span>
+              </a>
+
+              <p class="sucursal__dato">
+                <span>
+                  <strong>Horario</strong><br />
+                  {{ s.horario }}
+                </span>
+              </p>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="datos__bloque">
+        <h2 class="footer__titulo como-titulo">Síguenos</h2>
+
+        <div class="redes">
+          @for (red of redes; track red.nombre) {
+            <a
+              class="red"
+              [href]="red.url"
+              target="_blank"
+              rel="noopener noreferrer">
+              @switch (red.icono) {
+                @case ('instagram') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    aria-hidden="true">
+                    <use href="#icon-ig" />
+                  </svg>
+                }
+                @case ('facebook') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true">
+                    <use href="#icon-fb" />
+                  </svg>
+                }
+              }
+              {{ red.nombre }}
+            </a>
+          }
+
+          <a
+            class="red red--wa"
+            [href]="waLink()"
+            target="_blank"
+            rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <use href="#icon-wa" />
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+
+        <a class="datos__mail" [href]="'mailto:' + email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <use href="#icon-mail" />
+          </svg>
+          {{ email }}
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>

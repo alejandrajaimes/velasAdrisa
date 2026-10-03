@@ -1,0 +1,225 @@
+// Catalogo. Filtros con scroll horizontal, grilla flexible
+// y estado vacio ilustrado.
+
+.page-head {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2rem);
+  background: var(--azul-claro);
+  border-bottom: 1px solid var(--borde);
+}
+
+.page-head__inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.miga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+
+  a {
+    color: var(--azul-oscuro);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  [aria-current='page'] {
+    color: var(--texto);
+  }
+}
+
+// ---------- Filtros ----------
+.filtros {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--borde);
+}
+
+.filtros__track {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  padding: 0.75rem var(--gutter);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.chip {
+  flex: none;
+  scroll-snap-align: start;
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto);
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pill);
+  cursor: pointer;
+  touch-action: manipulation;
+  white-space: nowrap;
+  transition: background-color 160ms ease, color 160ms ease,
+    border-color 160ms ease;
+
+  &:hover {
+    border-color: var(--azul);
+    color: var(--azul-oscuro);
+  }
+
+  &.is-active {
+    background: var(--azul);
+    border-color: var(--azul);
+    color: var(--blanco);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+  }
+}
+
+// ---------- Estado vacio ----------
+.vacio {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.vacio__media {
+  // En movil el media va arriba y el texto debajo
+  min-height: 220px;
+}
+
+.vacio__texto {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  padding: 1.5rem 1.25rem 1.75rem;
+}
+
+.vacio__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+// ---------- Sin resultados ----------
+.sin-resultados {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  padding: 2rem 0;
+  max-width: 52ch;
+}
+
+// ---------- Contador ----------
+.contador {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--texto-suave);
+}
+
+.contador__limpiar {
+  min-height: 36px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--azul-oscuro);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pill);
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+
+  &:hover {
+    border-color: var(--azul);
+    background: var(--azul-claro);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dorado);
+    outline-offset: 2px;
+  }
+}
+
+// ---------- Grilla ----------
+.catalogo-grid {
+  --cols: 1;
+
+  @media (min-width: 480px) {
+    --cols: 2;
+  }
+
+  @media (min-width: 768px) {
+    --cols: 3;
+  }
+
+  @media (min-width: 992px) {
+    --cols: 4;
+  }
+}
+
+// ---------- Tablet / escritorio ----------
+@media (min-width: 768px) {
+  .vacio {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+  }
+
+  .vacio__media {
+    min-height: 100%;
+  }
+
+  .vacio__texto {
+    padding: 2rem;
+  }
+
+  .vacio__acciones {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 992px) {
+  .filtros__track {
+    gap: 0.6rem;
+  }
+
+  .chip {
+    min-height: 42px;
+    padding: 0.55rem 1.25rem;
+  }
+}

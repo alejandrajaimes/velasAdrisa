@@ -1,0 +1,212 @@
+// Footer: azul profundo con acentos dorados. Mobile-first.
+.footer {
+  background: var(--azul-profundo);
+  color: var(--blanco);
+  // Compensa el padding del contenedor principal para que
+  // el boton flotante no tape el ultimo texto legal.
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.footer__main {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+}
+
+.footer__marca {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.footer__logo {
+  width: auto;
+  height: 52px;
+  object-fit: contain;
+  // La marca blanca no debe heredar el color del texto
+  filter: brightness(0) invert(1);
+}
+
+.footer__eslogan {
+  max-width: 34ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer__redes {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.footer__red {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radio-pill);
+  color: var(--blanco);
+  transition: background-color 180ms ease, border-color 180ms ease,
+    color 180ms ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: var(--dorado);
+    border-color: var(--dorado);
+    color: var(--azul-profundo);
+  }
+}
+
+.footer__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--azul-profundo);
+  background: var(--dorado);
+  border-radius: var(--radio-pill);
+  transition: background-color 180ms ease, transform 160ms ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+
+  &:hover {
+    background: var(--dorado-claro);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.footer__titulo {
+  margin-bottom: 1rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.footer__nav ul {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.footer__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 160ms ease, padding-left 160ms ease;
+
+  &:hover {
+    color: var(--dorado);
+    padding-left: 0.25rem;
+  }
+}
+
+.footer__sucursales {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.footer__sucursal {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.footer__ciudad {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--blanco);
+}
+
+.footer__dato {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 32px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 160ms ease;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    color: var(--dorado);
+  }
+
+  &:hover {
+    color: var(--dorado-claro);
+  }
+}
+
+.footer__legal {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.footer__legal-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-block: 1.1rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__nit {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+// ---------- Tablet: 2 columnas ----------
+@media (min-width: 768px) {
+  .footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .footer__marca {
+    grid-column: 1 / -1;
+  }
+
+  .footer__legal-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+// ---------- Escritorio: 3 columnas ----------
+@media (min-width: 992px) {
+  .footer__main {
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+    gap: 3rem;
+  }
+
+  .footer__marca {
+    grid-column: auto;
+  }
+}

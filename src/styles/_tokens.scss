@@ -1,0 +1,88 @@
+// ==============================================
+// Adrisa — Design tokens
+// ==============================================
+
+// --- Marca ---
+$azul: #558ba4;
+$azul-oscuro: #3e6e85;
+$azul-profundo: #2a5164;
+$azul-claro: #e8f1f5;
+$azul-medio: #7fadbf;
+
+$dorado: #c9a227;
+$dorado-claro: #e3c86b;
+
+// --- Neutros ---
+$blanco: #ffffff;
+$crema: #faf8f5;
+$humo: #eef2f4;
+$borde: #dfe7ea;
+
+$texto: #1f2d33;
+$texto-suave: #5a6b75;
+$texto-tenue: #8a9aa3;
+$sobre-azul: #ffffff;
+$sobre-azul-suave: rgba(255, 255, 255, 0.78);
+
+// --- Tipografía ---
+$serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+$sans: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  Arial, sans-serif;
+
+// --- Layout ---
+$container-max: 1200px;
+$gutter: clamp(1.25rem, 4vw, 2rem);
+$header-h: 64px;
+
+// --- Radios ---
+$radio-sm: 6px;
+$radio: 10px;
+$radio-lg: 18px;
+$radio-pill: 999px;
+
+// --- Sombras ---
+$sombra-sm: 0 2px 8px rgba(42, 81, 100, 0.07);
+$sombra: 0 10px 30px rgba(42, 81, 100, 0.1);
+$sombra-lg: 0 24px 60px rgba(42, 81, 100, 0.16);
+
+// --- Transiciones ---
+$ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+$rapida: 160ms;
+$media: 280ms;
+$lenta: 500ms;
+
+// --- Z-index ---
+$z-header: 100;
+$z-drawer: 200;
+$z-float: 150;
+$z-toast: 300;
+
+// Expostas a CSS custom properties para uso desde componentes
+:root {
+  --azul: #{$azul};
+  --azul-oscuro: #{$azul-oscuro};
+  --azul-profundo: #{$azul-profundo};
+  --azul-claro: #{$azul-claro};
+  --azul-medio: #{$azul-medio};
+  --dorado: #{$dorado};
+  --dorado-claro: #{$dorado-claro};
+  --blanco: #{$blanco};
+  --crema: #{$crema};
+  --humo: #{$humo};
+  --borde: #{$borde};
+  --texto: #{$texto};
+  --texto-suave: #{$texto-suave};
+  --texto-tenue: #{$texto-tenue};
+  --header-h: #{$header-h};
+  --container-max: #{$container-max};
+  --gutter: #{$gutter};
+  --serif: #{$serif};
+  --sans: #{$sans};
+  --radio-sm: #{$radio-sm};
+  --radio: #{$radio};
+  --radio-lg: #{$radio-lg};
+  --radio-pill: #{$radio-pill};
+  --z-header: #{$z-header};
+  --z-drawer: #{$z-drawer};
+  --z-float: #{$z-float};
+}

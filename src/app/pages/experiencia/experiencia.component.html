@@ -1,0 +1,189 @@
+<section class="page-head">
+  <div class="container page-head__inner">
+    <nav class="miga" aria-label="Ruta de navegacion">
+      <a routerLink="/">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Experiencia</span>
+    </nav>
+
+    <h1 class="t-h2">Nuestra experiencia</h1>
+    <p class="t-lead">
+      Años seleccionando velas, acompañando clientes y
+      cuidando cada detalle del camino entre el taller y tu
+      hogar.
+    </p>
+  </div>
+</section>
+
+<!-- Métricas -->
+<section class="metricas">
+  <div class="container">
+    <div class="metricas__grid">
+      @for (m of metricas; track m.etiqueta) {
+        <div class="metrica">
+          <span class="metrica__valor">{{ m.valor }}</span>
+          <span class="metrica__etiqueta">{{ m.etiqueta }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Trayectoria: vertical en móvil, horizontal en escritorio -->
+<section class="section">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Trayectoria"
+      titulo="De un taller a una marca"
+      subtitulo="Los momentos que nos trajeron hasta aquí." />
+
+    <ol class="timeline">
+      @for (h of hitos; track h.anio) {
+        <li class="timeline__item">
+          <span class="timeline__nodo" aria-hidden="true"></span>
+          <div class="timeline__card">
+            <span class="timeline__anio">{{ h.anio }}</span>
+            <h3 class="timeline__titulo">{{ h.titulo }}</h3>
+            <p class="timeline__texto">{{ h.texto }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Proceso -->
+<section class="section section--azul-claro">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Como trabajamos"
+      titulo="Así es tu experiencia con Adrisa"
+      subtitulo="Cuatro pasos, sin vueltas ni sorpresas." />
+
+    <div class="grid proceso">
+      @for (p of proceso; track p.num) {
+        <article class="paso">
+          <span class="paso__num" aria-hidden="true">{{ p.num }}</span>
+          <h3 class="paso__titulo">{{ p.titulo }}</h3>
+          <p class="paso__texto">{{ p.texto }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Garantías -->
+<section class="section">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Garantía"
+      titulo="Lo que puedes esperar"
+      subtitulo="Compromisos que cumplimos en cada pedido."
+      [centro]="true" />
+
+    <div class="grid garantias">
+      @for (g of garantias; track g.titulo) {
+        <article class="garantia">
+          <svg
+            class="garantia__check"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          <div>
+            <h3 class="garantia__titulo">{{ g.titulo }}</h3>
+            <p class="garantia__texto">{{ g.texto }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Logística -->
+<section class="section section--crema">
+  <div class="container split split--texto-izq">
+    <div class="split__texto stack">
+      <span class="t-eyebrow">Logística</span>
+      <h2 class="t-h2">Del taller a tu puerta</h2>
+      <p class="t-lead">
+        Coordinamos con transportadoras de confianza y
+        seguimos cada envío personalmente. Enviamos a todo el
+        país y en ciudades seleccionadas ofrecemos entrega
+        local.
+      </p>
+
+      <ul class="log-lista">
+        <li>
+          <strong>Empaque reforzado</strong>
+          para velas en vidrio, tarros y figuras de cera.
+        </li>
+        <li>
+          <strong>Seguimiento</strong>
+          hasta que tu pedido quede en la entrega.
+        </li>
+        <li>
+          <strong>Tiempos claros</strong>
+          que te confirmamos antes de hacer el envío.
+        </li>
+      </ul>
+
+      <div>
+        <a class="btn btn--dorado" routerLink="/contacto">
+          Cotizar un envío
+        </a>
+      </div>
+    </div>
+
+    <div class="split__media log-media">
+      <div class="log-media__tarjeta">
+        <span class="log-media__icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#icon-pin" />
+          </svg>
+        </span>
+        <h3 class="t-h4">Cobertura</h3>
+        <p class="t-sm">
+          Santa Marta, Cartagena, Barranquilla y Bogotá, con
+          envíos nacionales para el resto del país.
+        </p>
+      </div>
+
+      <div class="log-media__tarjeta">
+        <span class="log-media__icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <use href="#icon-wa" />
+          </svg>
+        </span>
+        <h3 class="t-h4">Te avisamos</h3>
+        <p class="t-sm">
+          Cada cambio de estado de tu pedido lo recibes por
+          WhatsApp, con foto del empaque.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--azul">
+  <div class="container cta">
+    <h2 class="t-h2">¿Listo para darle vida a tu hogar?</h2>
+    <p class="t-lead">
+      Cuéntanos qué buscas y te acompañamos en cada paso.
+    </p>
+    <div class="cta__acciones">
+      <a class="btn btn--dorado" routerLink="/catalogo">
+        Explorar catálogo
+      </a>
+      <a class="btn btn--outline-light" routerLink="/contacto">
+        Contactar
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,131 @@
+@if (existe()) {
+  <article class="detalle">
+    <div class="container">
+      <nav class="miga" aria-label="Ruta de navegacion">
+        <a routerLink="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a routerLink="/catalogo">Catalogo</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ nombre() }}</span>
+      </nav>
+
+      <div class="detalle__grid">
+        <!-- Galeria -->
+        <div class="galeria">
+          @if (imagenes().length > 0) {
+            <img
+              class="galeria__principal"
+              [src]="imagenes()[0]"
+              [alt]="nombre()"
+              width="800"
+              height="1000" />
+          } @else {
+            <div class="galeria__placeholder">
+              <app-placeholder-img
+                [alt]="nombre()"
+                aspecto="4 / 5" />
+            </div>
+          }
+        </div>
+
+        <!-- Informacion -->
+        <div class="info">
+          @if (tipoNombre()) {
+            <span class="info__tipo">{{ tipoNombre() }}</span>
+          }
+
+          <h1 class="info__nombre t-h3">{{ nombre() }}</h1>
+
+          <p class="info__precio">
+            @if (precio() !== null) {
+              <span class="info__precio-label">Desde</span>
+              {{ precio() | precio }}
+            } @else {
+              Precio por confirmar
+            }
+          </p>
+
+          @if (!stock()) {
+            <p class="info__aviso" role="status">
+              Vela por encargo. Consulta disponibilidad.
+            </p>
+          }
+
+          @if (descripcion()) {
+            <p class="info__desc t-lead">{{ descripcion() }}</p>
+          }
+
+          <!-- Datos: filas apiladas, no una tabla que desborda en movil -->
+          <dl class="datos">
+            @if (material()) {
+              <div class="datos__fila">
+                <dt>Material</dt>
+                <dd>{{ material() }}</dd>
+              </div>
+            }
+            @if (medidas()) {
+              <div class="datos__fila">
+                <dt>Medidas</dt>
+                <dd>{{ medidas() }}</dd>
+              </div>
+            }
+            <div class="datos__fila">
+              <dt>Referencia</dt>
+              <dd>{{ nombre() }}</dd>
+            </div>
+            <div class="datos__fila">
+              <dt>Envio</dt>
+              <dd>A todo el pais</dd>
+            </div>
+          </dl>
+
+          <p class="info__nota">
+            No manejamos compra en linea. Escríbenos por WhatsApp y
+            te confirmamos precio, medidas exactas y disponibilidad
+            antes de hacer tu pedido.
+          </p>
+
+          <a
+            class="btn btn--dorado info__cta"
+            [href]="enlace()"
+            target="_blank"
+            rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <use href="#icon-wa" />
+            </svg>
+            Consultar por WhatsApp
+          </a>
+
+          <a class="btn btn--outline info__volver" routerLink="/catalogo">
+            Volver al catalogo
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA sticky en movil: el boton siempre a mano -->
+    <div class="sticky-cta">
+      <div class="sticky-cta__info">
+        <span class="sticky-cta__nombre">{{ nombre() }}</span>
+        @if (precio() !== null) {
+          <span class="sticky-cta__precio">{{ precio() | precio }}</span>
+        }
+      </div>
+      <a
+        class="btn btn--dorado sticky-cta__btn"
+        [href]="enlace()"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <use href="#icon-wa" />
+        </svg>
+        Consultar
+      </a>
+    </div>
+  </article>
+} @else {
+  <!-- Mientras hace redirect -->
+  <div class="contenedor-carga container">
+    <p>Cargando producto...</p>
+  </div>
+}

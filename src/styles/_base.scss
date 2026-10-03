@@ -1,0 +1,464 @@
+@use "tokens" as *;
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+// ==============================================
+// Reset
+// ==============================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $sans;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: $texto;
+  background: $blanco;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // Evita el rebote de scroll horizontal en iOS
+  overflow-x: hidden;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $serif;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid $dorado;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+// ==============================================
+// Tipografía fluida — sin saltos entre tamaños
+// ==============================================
+.t-h1 {
+  font-size: clamp(2.25rem, 8vw + 0.5rem, 5rem);
+}
+
+.t-h2 {
+  font-size: clamp(1.75rem, 4vw + 0.5rem, 3rem);
+}
+
+.t-h3 {
+  font-size: clamp(1.35rem, 2vw + 0.75rem, 1.85rem);
+}
+
+.t-h4 {
+  font-size: clamp(1.15rem, 1.2vw + 0.9rem, 1.35rem);
+}
+
+.t-lead {
+  font-size: clamp(1.05rem, 1vw + 0.95rem, 1.3rem);
+  line-height: 1.6;
+  color: $texto-suave;
+}
+
+.t-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.t-sm {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: $texto-suave;
+}
+
+// Etiqueta versalita dorada sobre fondo de texto
+.t-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: $sans;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $dorado;
+
+  &::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    flex: none;
+  }
+}
+
+.t-medida {
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+}
+
+.t-centro {
+  text-align: center;
+
+  .t-eyebrow::before {
+    display: none;
+  }
+}
+
+// ==============================================
+// Layout
+// ==============================================
+.container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $gutter;
+}
+
+// Espaciado vertical de sección, menor en celular
+.section {
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.section--crema {
+  background: $crema;
+}
+
+.section--azul-claro {
+  background: $azul-claro;
+}
+
+.section--azul {
+  @include degradado-marca;
+  color: $sobre-azul;
+
+  .t-lead,
+  .t-sm {
+    color: $sobre-azul-suave;
+  }
+}
+
+.section-head {
+  max-width: 62ch;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+
+  > * + * {
+    margin-top: 0.75rem;
+  }
+}
+
+.section-head--centro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+// Grid con minmax(0, 1fr): el 0 evita que un
+// contenido largo reviente el ancho en celular.
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+@include up(sm) {
+  .grid {
+    grid-template-columns: repeat(var(--cols-sm, var(--cols, 1)), minmax(0, 1fr));
+  }
+}
+
+@include up(md) {
+  .grid {
+    grid-template-columns: repeat(var(--cols-md, var(--cols-sm, var(--cols, 1))), minmax(0, 1fr));
+  }
+}
+
+@include up(lg) {
+  .grid {
+    grid-template-columns: repeat(var(--cols-lg, var(--cols-md, var(--cols-sm, var(--cols, 1)))), minmax(0, 1fr));
+  }
+}
+
+@include up(xl) {
+  .grid {
+    grid-template-columns: repeat(var(--cols-xl, var(--cols-lg, var(--cols-md, var(--cols-sm, var(--cols, 1))))), minmax(0, 1fr));
+  }
+}
+
+// Rejilla de dos columnas en desktop, apiladas en móvil
+.split {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+
+  @include up(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.split--texto-izq {
+  @include up(lg) {
+    .split__media {
+      order: -1;
+    }
+  }
+}
+
+// ==============================================
+// Botones
+// ==============================================
+.btn {
+  @include boton-base;
+  background: $azul;
+  color: $blanco;
+
+  &:hover {
+    background: $azul-oscuro;
+  }
+}
+
+.btn--dorado {
+  background: $dorado;
+  color: $azul-profundo;
+
+  &:hover {
+    background: $dorado-claro;
+    box-shadow: 0 8px 24px rgba(201, 162, 39, 0.35);
+  }
+}
+
+.btn--blanco {
+  background: $blanco;
+  color: $azul-oscuro;
+
+  &:hover {
+    background: $azul-claro;
+  }
+}
+
+// Contorno: sobre fondo claro usa azul oscuro para
+// cumplir contraste AA en texto.
+.btn--outline {
+  background: transparent;
+  border-color: rgba(85, 139, 164, 0.4);
+  color: $azul-oscuro;
+
+  &:hover {
+    border-color: $azul;
+    background: $azul-claro;
+  }
+}
+
+.section--azul .btn--outline,
+.btn--outline-light {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: $blanco;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: $blanco;
+  }
+}
+
+.btn--bloque {
+  width: 100%;
+}
+
+.btn--sm {
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.6875rem;
+}
+
+// Zona táctil mínima de 44x44px
+.btn-icon {
+  @include tap-highlight;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: $radio-pill;
+  color: inherit;
+  transition: background-color $rapida $ease, color $rapida $ease;
+
+  &:hover {
+    background: rgba(85, 139, 164, 0.1);
+  }
+}
+
+// ==============================================
+// Formularios
+// ==============================================
+// 16px mínimo: por debajo, iOS Safari hace zoom al
+// enfocar y el usuario se pierde la pantalla.
+.campo {
+  display: grid;
+  gap: 0.4rem;
+
+  > label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $texto-suave;
+  }
+}
+
+.campo__control {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: $blanco;
+  border: 1px solid $borde;
+  border-radius: $radio;
+  transition: border-color $rapida $ease, box-shadow $rapida $ease;
+
+  &::placeholder {
+    color: $texto-tenue;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $azul;
+    box-shadow: 0 0 0 3px rgba(85, 139, 164, 0.18);
+  }
+
+  &.is-invalid {
+    border-color: #c0392b;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.16);
+    }
+  }
+}
+
+textarea.campo__control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.campo__error {
+  font-size: 0.8125rem;
+  color: #c0392b;
+}
+
+// ==============================================
+// Utilidades
+// ==============================================
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Salta al contenido con el teclado.
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: $z-toast;
+  padding: 0.75rem 1.25rem;
+  background: $azul-oscuro;
+  color: $blanco;
+  border-radius: 0 0 $radio $radio;
+  transition: top $rapida $ease;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+.stack > * + * {
+  margin-top: var(--stack-gap, 1rem);
+}
+
+.centro-texto {
+  text-align: center;
+}
+
+.texto-suave {
+  color: $texto-suave;
+}
+
+.prose-measure {
+  max-width: 65ch;
+}
+
+.accent {
+  color: $dorado;
+}
+
+// ==============================================
+// Preferencia de movimiento reducido
+// ==============================================
+@include reduced-motion {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

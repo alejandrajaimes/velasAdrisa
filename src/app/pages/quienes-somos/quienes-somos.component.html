@@ -1,0 +1,128 @@
+<section class="page-head">
+  <div class="container page-head__inner">
+    <nav class="miga" aria-label="Ruta de navegacion">
+      <a routerLink="/">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Quienes somos</span>
+    </nav>
+
+    <h1 class="t-h2">Quienes somos</h1>
+    <p class="t-lead">
+      Adrisa nacio de una idea simple: un hogar no se llena de
+      cosas, se llena de detalles.
+    </p>
+  </div>
+</section>
+
+<!-- Historia -->
+<section class="section">
+  <div class="container">
+    <div class="prose">
+      <span class="t-eyebrow">Nuestra historia</span>
+      <h2 class="t-h2">
+        Elegancia en la belleza de lo simple
+      </h2>
+      <p class="t-lead">
+        Adrisa nace de la conviccion de que los espacios
+        naturales y serenos son los que mejor nos acompanan.
+        Empezamos seleccionando piezas hechas a mano para
+        nuestra propia casa, y la idea crecio hasta convertirse
+        en una marca que hoy lleva calidez a hogares de todo
+        el pais.
+      </p>
+      <p class="t-lead">
+        Nos inspira lo atemporal: formas que no se pasan de
+        moda, materiales que envejecen con gracia y colores que
+        se integran sin esfuerzo. Creemos que decorar es una
+        forma de cuidar tu bienestar, y por eso tratamos cada
+        pieza con el mismo respeto con el que queremos tratar
+        tu hogar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Manifiesto -->
+<section class="section section--azul-claro">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Manifiesto"
+      titulo="Lo que creemos"
+      subtitulo="Tres ideas que guian cada decision que tomamos."
+      [centro]="true" />
+
+    <div class="grid manifiesto">
+      @for (v of valores; track v.num) {
+        <article class="valor">
+          <span class="valor__num" aria-hidden="true">{{ v.num }}</span>
+          <h3 class="valor__titulo">{{ v.titulo }}</h3>
+          <p class="valor__texto">{{ v.texto }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Galería de taller -->
+<section class="section">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Detras de escena"
+      titulo="El taller y sus manos"
+      subtitulo="Cada pieza tiene una historia antes de llegar a tu casa."
+      [centro]="true" />
+
+    <div class="galeria">
+      @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+        <figure class="galeria__item">
+          <app-placeholder-img
+            [alt]="'Proceso artesanal Adrisa ' + item"
+            aspecto="4 / 5" />
+        </figure>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Equipo -->
+<section class="section section--crema">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Nuestro equipo"
+      titulo="Quienes lo hacen posible"
+      subtitulo="Un gran equipo que atiende cada pedido como si fuera unico."
+      [centro]="true" />
+
+    <div class="grid equipo">
+      @for (p of equipo; track p.nombre) {
+        <article class="persona">
+          <div class="persona__avatar">
+            <app-placeholder-img [alt]="p.nombre" aspecto="1 / 1" />
+          </div>
+          <h3 class="persona__nombre">{{ p.nombre }}</h3>
+          <p class="persona__rol">{{ p.rol }}</p>
+          <p class="persona__texto">{{ p.texto }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--azul">
+  <div class="container cta">
+    <h2 class="t-h2">Queremos conocerte</h2>
+    <p class="t-lead">
+      Cuéntanos qué buscas para tu hogar y te proponemos
+      las piezas indicadas.
+    </p>
+    <div class="cta__acciones">
+      <a class="btn btn--dorado" routerLink="/contacto">
+        Hablar con Adrisa
+      </a>
+      <a class="btn btn--outline-light" routerLink="/catalogo">
+        Ver catálogo
+      </a>
+    </div>
+  </div>
+</section>

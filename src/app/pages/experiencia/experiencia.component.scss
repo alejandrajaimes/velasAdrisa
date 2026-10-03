@@ -1,0 +1,370 @@
+// Experiencia. Timeline vertical en móvil, horizontal en
+// escritorio. Las grillas se configuran por clase, no por
+// estilo inline.
+
+.page-head {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2rem);
+  background: var(--azul-claro);
+  border-bottom: 1px solid var(--borde);
+}
+
+.page-head__inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.miga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+
+  a {
+    color: var(--azul-oscuro);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  [aria-current='page'] {
+    color: var(--texto);
+  }
+}
+
+// ---------- Métricas ----------
+.metricas {
+  background: var(--azul-profundo);
+  color: var(--blanco);
+}
+
+.metricas__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+  padding-block: clamp(2rem, 4vw, 2.75rem);
+}
+
+.metrica {
+  display: grid;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.metrica__valor {
+  font-family: var(--serif);
+  font-size: clamp(1.85rem, 5vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--dorado-claro);
+}
+
+.metrica__etiqueta {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+// ---------- Timeline ----------
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0.25rem 0 0.25rem 1.75rem;
+  list-style: none;
+
+  // Riel vertical a la izquierda
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 7px;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      var(--dorado) 0%,
+      var(--azul-claro) 100%
+    );
+  }
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__nodo {
+  position: absolute;
+  top: 0.65rem;
+  left: calc(-1.75rem + 1px);
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--dorado);
+  border-radius: var(--radio-pill);
+  background: var(--blanco);
+  transform: translateX(-50%);
+}
+
+.timeline__card {
+  padding: 1.15rem 1.25rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.timeline__anio {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.timeline__titulo {
+  margin-bottom: 0.4rem;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.timeline__texto {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--texto-suave);
+}
+
+// ---------- Proceso ----------
+.proceso {
+  --cols: 1;
+
+  @media (min-width: 480px) {
+    --cols: 2;
+  }
+
+  @media (min-width: 992px) {
+    --cols: 4;
+  }
+}
+
+.paso {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+  padding: 1.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.paso__num {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--dorado);
+  border-radius: var(--radio-pill);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--dorado);
+}
+
+.paso__titulo {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.paso__texto {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--texto-suave);
+}
+
+// ---------- Garantías ----------
+.garantias {
+  --cols: 1;
+
+  @media (min-width: 480px) {
+    --cols: 2;
+  }
+}
+
+.garantia {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.95rem;
+  align-items: start;
+  padding: 1.35rem 1.25rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.garantia__check {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  color: var(--dorado);
+  background: var(--azul-claro);
+  border-radius: var(--radio-pill);
+  flex: none;
+}
+
+.garantia__titulo {
+  margin-bottom: 0.3rem;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.garantia__texto {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--texto-suave);
+}
+
+// ---------- Logística ----------
+.log-lista {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.log-lista li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.975rem;
+  line-height: 1.65;
+  color: var(--texto-suave);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radio-pill);
+    background: var(--dorado);
+  }
+
+  strong {
+    color: var(--texto);
+    font-weight: 500;
+  }
+}
+
+.log-media {
+  display: grid;
+  gap: 1rem;
+}
+
+.log-media__tarjeta {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.35rem 1.25rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.log-media__icono {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radio-pill);
+  color: var(--azul-profundo);
+  background: var(--azul-claro);
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+// ---------- CTA ----------
+.cta {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.cta__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 340px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    width: auto;
+    max-width: none;
+  }
+}
+
+// ---------- Métricas en pantallas grandes ----------
+@media (min-width: 768px) {
+  .metricas__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+// ---------- Timeline horizontal en escritorio ----------
+@media (min-width: 992px) {
+  .timeline {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 2rem 0 0;
+
+    // Riel horizontal
+    &::before {
+      top: 2.4rem;
+      right: 0;
+      bottom: auto;
+      left: 0;
+      width: auto;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--dorado) 0%,
+        var(--azul-claro) 100%
+      );
+    }
+  }
+
+  .timeline__nodo {
+    top: calc(2.4rem - 8px);
+    left: 1.25rem;
+    transform: none;
+  }
+
+  .timeline__card {
+    margin-top: 1.25rem;
+  }
+}

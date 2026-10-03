@@ -1,0 +1,256 @@
+// Contacto. Mobile-first: formulario apilado, datos
+// debajo. En escritorio, formulario a la izquierda y
+// datos a la derecha.
+
+.page-head {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2rem);
+  background: var(--azul-claro);
+  border-bottom: 1px solid var(--borde);
+}
+
+.page-head__inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.miga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+
+  a {
+    color: var(--azul-oscuro);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  [aria-current='page'] {
+    color: var(--texto);
+  }
+}
+
+.contacto__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+// ---------- Formulario ----------
+.formulario {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.5rem 1.25rem 1.75rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.form__nota {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--texto-tenue);
+}
+
+.ok {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1rem 1.15rem;
+  color: var(--azul-oscuro);
+  background: var(--azul-claro);
+  border: 1px solid rgba(85, 139, 164, 0.35);
+  border-radius: var(--radio);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: var(--dorado);
+    flex: none;
+    margin-top: 2px;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+}
+
+// ---------- Datos ----------
+.datos {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+}
+
+.datos__bloque {
+  display: grid;
+  gap: 1rem;
+}
+
+.como-titulo {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dorado);
+  margin: 0;
+}
+
+.sucursales {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.sucursal {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.sucursal__ciudad {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.sucursal__dato {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--texto-suave);
+  text-decoration: none;
+  transition: color 160ms ease;
+
+  strong {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--texto-tenue);
+  }
+
+  svg {
+    width: 19px;
+    height: 19px;
+    margin-top: 3px;
+    color: var(--dorado);
+    flex: none;
+  }
+
+  &:hover {
+    color: var(--texto);
+  }
+}
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.red {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 46px;
+  padding: 0.55rem 1.05rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--texto);
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pill);
+  text-decoration: none;
+  transition: color 160ms ease, border-color 160ms ease,
+    background-color 160ms ease;
+
+  svg {
+    width: 19px;
+    height: 19px;
+    flex: none;
+  }
+
+  &:hover {
+    color: var(--azul-oscuro);
+    border-color: var(--azul);
+    background: var(--azul-claro);
+  }
+
+  &--wa {
+    color: var(--blanco);
+    background: var(--azul);
+    border-color: var(--azul);
+
+    &:hover {
+      color: var(--blanco);
+      background: var(--azul-oscuro);
+      border-color: var(--azul-oscuro);
+    }
+  }
+}
+
+.datos__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  color: var(--azul-oscuro);
+  text-decoration: none;
+
+  svg {
+    width: 19px;
+    height: 19px;
+    color: var(--dorado);
+    flex: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// ---------- Tablet ----------
+@media (min-width: 768px) {
+  .formulario {
+    padding: 2rem;
+  }
+}
+
+// ---------- Escritorio ----------
+@media (min-width: 992px) {
+  .contacto__grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}

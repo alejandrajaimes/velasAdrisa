@@ -1,0 +1,195 @@
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__fondo" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <p class="hero__eyebrow">Velas  Aromáticas</p>
+    <h1 class="hero__titulo t-h1">
+      Enciende la luz de  <em>tu vida</em>
+    </h1>
+    <p class="hero__lead t-lead">
+      Velas hechas a mano para darle calidez, aroma y luz a
+      cada rincón de tu casa.
+    </p>
+
+    <div class="hero__acciones">
+      <a class="btn btn--dorado" routerLink="/catalogo">
+        Ver catálogo
+      </a>
+      <a
+        class="btn btn--outline-light"
+        [href]="waLink()"
+        target="_blank"
+        rel="noopener noreferrer">
+        Hablar con Adrisa
+      </a>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#tipos" aria-label="Bajar a tipos de vela">
+    <span aria-hidden="true">Descubre</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </a>
+</section>
+
+<!-- ============ TIPOS DE VELA ============ -->
+<section id="tipos" class="section section--crema">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Explora"
+      titulo="Nuestros tipos de vela"
+      subtitulo="Para tu hogar, para recordar y para las fechas que merecen ser celebradas."
+      [centro]="true" />
+  </div>
+
+  <div class="cats">
+    <div class="cats__track">
+      @for (tipo of tipos; track tipo.id) {
+        <a
+          class="cat"
+          routerLink="/catalogo"
+          [queryParams]="{ tipo: tipo.id }">
+          <span class="cat__marca" aria-hidden="true">
+            <app-placeholder-img
+              [alt]="tipo.nombre"
+              aspecto="1 / 1" />
+          </span>
+          <span class="cat__nombre">{{ tipo.nombre }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESTACADOS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="dest-head">
+      <app-section-heading
+        eyebrow="Selección"
+        titulo="Velas destacadas"
+        subtitulo="Lo que más nos encanta del catálogo en este momento." />
+    </div>
+
+    @if (hayDestacados()) {
+      <app-scroll-carrusel aria-label="Productos destacados">
+        @for (p of destacados; track p.id) {
+          <app-product-card [producto]="p" />
+        }
+      </app-scroll-carrusel>
+    } @else {
+      <div class="espera">
+        <app-placeholder-img
+          alt="Catálogo de Adrisa en preparación"
+          aspecto="16 / 9" />
+        <div class="espera__texto">
+          <h3 class="t-h3">El catálogo se está preparando</h3>
+          <p class="t-lead">
+            Estamos seleccionando cada vela con mucho cuidado.
+            Escríbenos por WhatsApp y te avisamos en cuanto estén
+            disponibles.
+          </p>
+          <a
+            class="btn btn--dorado"
+            [href]="waLink()"
+            target="_blank"
+            rel="noopener noreferrer">
+            Quiero que me avisen
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ============ MANIFIESTO ============ -->
+<section class="section section--azul-claro">
+  <div class="container split split--texto-izq">
+    <div class="split__texto stack">
+      <span class="t-eyebrow">Nuestra forma de trabajar</span>
+      <h2 class="t-h2">Déjalo en <em class="accent">nuestras</em> manos</h2>
+      <p class="t-lead">
+        Creemos que un hogar no se llena de cosas, se llena de detalles.
+        Por eso cada vela de Adrisa se elige con criterio: cera
+        vegetal, aromas naturales y mechas que arden parejo.
+      </p>
+      <ul class="puntos">
+        <li>
+          <span class="puntos__icono" aria-hidden="true">01</span>
+          <span>
+            <strong>Selección artesanal</strong>
+            Trabajamos con talleres y creadores locales.
+          </span>
+        </li>
+        <li>
+          <span class="puntos__icono" aria-hidden="true">02</span>
+          <span>
+            <strong>Materiales naturales</strong>
+            Cera vegetal, mechas de algodón y fragancias naturales.
+          </span>
+        </li>
+        <li>
+          <span class="puntos__icono" aria-hidden="true">03</span>
+          <span>
+            <strong>Asesoría personalizada</strong>
+            Te ayudamos a elegir la vela ideal según tu espacio.
+          </span>
+        </li>
+      </ul>
+      <div>
+        <a class="btn" routerLink="/quienes-somos">
+          Conoce nuestra historia
+        </a>
+      </div>
+    </div>
+
+    <div class="split__media">
+      <app-placeholder-img
+        alt="Rincón de hogar iluminado con velas de Adrisa"
+        aspecto="4 / 5" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="section">
+  <div class="container">
+    <app-section-heading
+      eyebrow="Galería"
+      titulo="Ambientes que inspiran"
+      subtitulo="Ideas para llevar la calidez de Adrisa a tu casa."
+      [centro]="true" />
+
+    <div class="galeria">
+      @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+        <figure class="galeria__item">
+          <app-placeholder-img
+            [alt]="'Ambiente Adrisa ' + item"
+            aspecto="4 / 5" />
+        </figure>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANDA CTA ============ -->
+<section class="section section--azul">
+  <div class="container cta">
+    <h2 class="t-h2">¿Tienes un espacio en mente?</h2>
+    <p class="t-lead">
+      Cuéntanos qué estás buscando y te proponemos las velas
+      indicadas. Respondemos por WhatsApp.
+    </p>
+    <a
+      class="btn btn--dorado"
+      [href]="waLink()"
+      target="_blank"
+      rel="noopener noreferrer">
+      Empezar la conversación
+    </a>
+  </div>
+</section>
+
+<app-newsletter></app-newsletter>

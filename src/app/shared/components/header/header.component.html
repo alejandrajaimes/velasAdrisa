@@ -1,0 +1,144 @@
+<header class="header" [class.header--scrolled]="scrolled()">
+  <div class="header__inner container">
+    <a
+      class="header__logo"
+      routerLink="/"
+      aria-label="Adrisa, ir al inicio">
+      <img src="3 LOGO ADRISA.jpg" alt="Adrisa" width="120" height="40" />
+    </a>
+
+    <nav class="header__nav" aria-label="Navegacion principal">
+      @for (item of navItems; track item.ruta) {
+        <a
+          class="header__link"
+          [routerLink]="item.ruta"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.ruta === '/' }">
+          {{ item.texto }}
+        </a>
+      }
+    </nav>
+
+    <div class="header__acciones">
+      <a
+        class="header__wa"
+        [href]="waLink()"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <use href="#icon-wa" />
+        </svg>
+        <span class="header__wa-texto">Escribenos</span>
+      </a>
+
+      <button
+        type="button"
+        class="header__burguer"
+        [class.is-open]="drawerAbierto()"
+        [attr.aria-expanded]="drawerAbierto()"
+        aria-controls="menu-movil"
+        [attr.aria-label]="drawerAbierto() ? 'Cerrar menu' : 'Abrir menu'"
+        (click)="alternarDrawer()">
+        <span class="header__burguer-lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div
+    class="drawer__overlay"
+    [class.is-visible]="drawerAbierto()"
+    (click)="cerrarDrawer()"
+    aria-hidden="true"></div>
+
+  <!-- Drawer lateral -->
+  <div
+    id="menu-movil"
+    class="drawer"
+    [class.is-open]="drawerAbierto()"
+    role="dialog"
+    [attr.aria-modal]="drawerAbierto() ? 'true' : null"
+    aria-label="Menu">
+    <div class="drawer__top">
+      <span class="drawer__titulo">Menu</span>
+      <button
+        type="button"
+        class="drawer__cerrar"
+        aria-label="Cerrar menu"
+        (click)="cerrarDrawer()">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer__nav" aria-label="Navegacion movil">
+      @for (item of navItems; track item.ruta) {
+        <a
+          class="drawer__link"
+          [routerLink]="item.ruta"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.ruta === '/' }"
+          (click)="cerrarDrawer()">
+          {{ item.texto }}
+        </a>
+      }
+    </nav>
+
+    <div class="drawer__pie">
+      <a
+        class="drawer__wa"
+        [href]="waLink()"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <use href="#icon-wa" />
+        </svg>
+        Pedir por WhatsApp
+      </a>
+
+      <p class="drawer__contacto">
+        {{ sucursalPrincipal().ciudad }}
+        <span aria-hidden="true">&middot;</span>
+        {{ sucursalPrincipal().celular }}
+      </p>
+
+      <div class="drawer__redes">
+        @for (red of redes; track red.nombre) {
+          <a
+            class="drawer__red"
+            [href]="red.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="red.nombre">
+            @switch (red.icono) {
+              @case ('instagram') {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  aria-hidden="true">
+                  <use href="#icon-ig" />
+                </svg>
+              }
+              @case ('facebook') {
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <use href="#icon-fb" />
+                </svg>
+              }
+            }
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</header>

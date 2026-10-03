@@ -1,0 +1,39 @@
+@use 'sass:map';
+
+// ==============================================
+// Adrisa — Breakpoints (mobile-first)
+// El estilo base ES el celular. Los breakpoints
+// solo agregan complejidad hacia arriba.
+// ==============================================
+
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+// Aplica estilos a partir del breakpoint indicado.
+@mixin up($bp) {
+  $ancho: map.get($breakpoints, $bp);
+  @if $ancho == null {
+    @error "Breakpoint desconocido: #{$bp}";
+  }
+  @media (min-width: $ancho) {
+    @content;
+  }
+}
+
+// Aplica estilos solo en el rango base (celular), hasta antes de `md`.
+@mixin solo-movil($hasta: md) {
+  @media (max-width: (map.get($breakpoints, $hasta) - 0.02px)) {
+    @content;
+  }
+}
+
+// Respeta la preferencia del sistema de reducir el movimiento.
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

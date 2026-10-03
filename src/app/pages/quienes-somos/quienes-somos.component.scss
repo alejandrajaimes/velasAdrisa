@@ -1,0 +1,199 @@
+// Quienes somos. Mobile-first.
+
+.page-head {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3vw, 2rem);
+  background: var(--azul-claro);
+  border-bottom: 1px solid var(--borde);
+}
+
+.page-head__inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.miga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+
+  a {
+    color: var(--azul-oscuro);
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  [aria-current='page'] {
+    color: var(--texto);
+  }
+}
+
+// ---------- Historia ----------
+.prose {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 65ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
+// ---------- Manifiesto ----------
+.manifiesto {
+  --cols: 1;
+
+  @media (min-width: 768px) {
+    --cols: 3;
+  }
+}
+
+.valor {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra);
+  }
+}
+
+.valor__num {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--dorado);
+  border-radius: var(--radio-pill);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--dorado);
+}
+
+.valor__titulo {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.valor__texto {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--texto-suave);
+}
+
+// ---------- Galería ----------
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.galeria__item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  transition: transform 240ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  // Un par de piezas destacadas dan ritmo al muro
+  &:nth-child(3n) {
+    grid-column: span 2;
+  }
+}
+
+// ---------- Equipo ----------
+.equipo {
+  --cols: 1;
+
+  @media (min-width: 480px) {
+    --cols: 2;
+  }
+
+  @media (min-width: 992px) {
+    --cols: 3;
+  }
+}
+
+.persona {
+  display: grid;
+  gap: 0.55rem;
+  justify-items: start;
+  padding: 1.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.persona__avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radio-pill);
+  overflow: hidden;
+  border: 2px solid var(--dorado-claro);
+}
+
+.persona__nombre {
+  margin-top: 0.35rem;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.persona__rol {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.persona__texto {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--texto-suave);
+}
+
+// ---------- CTA ----------
+.cta {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.cta__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 340px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    width: auto;
+    max-width: none;
+  }
+}

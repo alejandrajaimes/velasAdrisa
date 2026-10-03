@@ -1,0 +1,329 @@
+// Home. Mobile-first: todo apila en celular, las columnas
+// aparecen solo cuando hay espacio suficiente.
+
+// ============ HERO ============
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // svh evita que la barra de direcciones del navegador
+  // corte el CTA en movil (vh no la descuenta).
+  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100vh - var(--header-h)); // fallback
+  padding-block: clamp(3rem, 10vw, 6rem);
+  overflow: hidden;
+  color: var(--blanco);
+}
+
+.hero__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(
+      135deg,
+      var(--azul) 0%,
+      var(--azul-profundo) 55%,
+      var(--azul-oscuro) 100%
+    ),
+    radial-gradient(
+      ellipse at 85% 15%,
+      rgba(227, 200, 107, 0.3),
+      transparent 55%
+    );
+  background-blend-mode: screen;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 255, 255, 0.12),
+      transparent 50%
+    );
+  }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dorado-claro);
+
+  &::before,
+  &::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+.hero__titulo {
+  margin-bottom: 1.1rem;
+
+  em {
+    font-style: italic;
+    color: var(--dorado-claro);
+  }
+}
+
+.hero__lead {
+  max-width: 40ch;
+  margin-inline: auto;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.hero__scroll {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: clamp(2rem, 6vw, 3.5rem);
+  font-size: 0.6875rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 180ms ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+
+  &:hover {
+    color: var(--dorado-claro);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+// ============ CATEGORÍAS ============
+// Scroll horizontal con snap en celular: un icono de 72px
+// se ve bien, uno de 140px en dos columnas se ve diminuto.
+.cats {
+  // Sangrado lateral para que el track llegue al borde
+  // de la pantalla sin que el contenedor lo recorte.
+  margin-top: -0.5rem;
+}
+
+.cats__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(128px, 40vw);
+  gap: 0.85rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  padding: 0.5rem var(--gutter) 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.cat {
+  display: grid;
+  gap: 0.65rem;
+  scroll-snap-align: start;
+  text-align: center;
+  text-decoration: none;
+  color: var(--texto);
+
+  &__marca {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-sm);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  &__nombre {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 180ms ease;
+  }
+
+  &:hover .cat__marca {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra);
+  }
+
+  &:hover .cat__nombre {
+    color: var(--azul-oscuro);
+  }
+}
+
+// ============ ESTADO ESPERA ============
+.espera {
+  display: grid;
+  gap: 1.5rem;
+  overflow: hidden;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.espera__texto {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+  padding: 0 1.25rem 1.5rem;
+}
+
+// ============ PUNTOS ============
+.puntos {
+  display: grid;
+  gap: 1rem;
+}
+
+.puntos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.puntos__icono {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--dorado);
+  border-radius: var(--radio-pill);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--dorado);
+  flex: none;
+}
+
+.puntos strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+// ============ GALERÍA ============
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.galeria__item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  transition: transform 240ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  // Un par de piezas destacadas en tamaños distintos
+  // dan ritmo al muro sin JS.
+  &:nth-child(3),
+  &:nth-child(6) {
+    grid-column: span 2;
+  }
+}
+
+// ============ CTA ============
+.cta {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: center;
+  text-align: center;
+}
+
+// ============ TABLET ============
+@media (min-width: 768px) {
+  .hero__acciones {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cats__track {
+    grid-auto-columns: minmax(150px, 22vw);
+  }
+
+  .espera {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+  }
+
+  .espera__texto {
+    padding: 1.75rem 2rem;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+
+    &:nth-child(3),
+    &:nth-child(6) {
+      grid-column: auto;
+    }
+  }
+}
+
+// ============ ESCRITORIO ============
+@media (min-width: 992px) {
+  .hero__titulo {
+    font-size: clamp(2.75rem, 5.5vw, 5.25rem);
+  }
+
+  .cats__track {
+    grid-auto-columns: minmax(160px, 1fr);
+  }
+
+  .galeria {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    &:nth-child(3),
+    &:nth-child(6) {
+      grid-column: auto;
+    }
+  }
+}

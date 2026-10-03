@@ -1,0 +1,106 @@
+<footer class="footer">
+  <div class="footer__main container">
+    <div class="footer__marca">
+      <img
+        class="footer__logo"
+        src="logoBlancoAdrisa.png"
+        alt="Adrisa"
+        width="160"
+        height="52" />
+      <p class="footer__eslogan">
+        Velas  Aromáticas para transformar tu hogar.
+      </p>
+
+      <div class="footer__redes">
+        @for (red of redes; track red.nombre) {
+          <a
+            class="footer__red"
+            [href]="red.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="red.nombre">
+            @switch (red.icono) {
+              @case ('instagram') {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  aria-hidden="true">
+                  <use href="#icon-ig" />
+                </svg>
+              }
+              @case ('facebook') {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true">
+                  <use href="#icon-fb" />
+                </svg>
+              }
+            }
+          </a>
+        }
+      </div>
+
+      <a
+        class="footer__wa"
+        [href]="waLink()"
+        target="_blank"
+        rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <use href="#icon-wa" />
+        </svg>
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+
+    <nav class="footer__nav" aria-label="Navegacion del pie de pagina">
+      <h2 class="footer__titulo">Navegación</h2>
+      <ul>
+        @for (item of navItems; track item.ruta) {
+          <li>
+            <a [routerLink]="item.ruta">{{ item.texto }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="footer__contacto">
+      <h2 class="footer__titulo">Contáctanos</h2>
+      <ul class="footer__sucursales">
+        @for (s of sucursales; track s.ciudad) {
+          <li class="footer__sucursal">
+            <span class="footer__ciudad">{{ s.ciudad }}</span>
+            <span class="footer__dato">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <use href="#icon-pin" />
+              </svg>
+              {{ s.direccion }}
+            </span>
+            <a class="footer__dato" href="tel:+57{{ s.celular }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <use href="#icon-wa" />
+              </svg>
+              {{ s.celular }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <a class="footer__dato" [href]="'mailto:' + email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <use href="#icon-mail" />
+        </svg>
+        {{ email }}
+      </a>
+    </div>
+  </div>
+
+  <div class="footer__legal">
+    <div class="container footer__legal-inner">
+      <p>&copy; {{ anio }} {{ empresa }}. Todos los derechos reservados.</p>
+      <p class="footer__nit">{{ nit }}</p>
+    </div>
+  </div>
+</footer>

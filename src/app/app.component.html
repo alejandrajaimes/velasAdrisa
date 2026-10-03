@@ -1,24 +1,14 @@
-<main class="coming-soon">
-  <div class="content">
-    <img
-      src="3 LOGO ADRISA.jpg"
-      alt="Logo Adrisa"
-      class="logo"
-      width="300"
-      height="300"
-    />
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <span class="badge">Próximamente</span>
+<app-icon-sprite></app-icon-sprite>
+<app-header></app-header>
 
-    <h1 class="title">Estamos creando algo grande</h1>
-
-    <p class="subtitle">
-      El sitio web de Adrisa está en construcción. Vuelve pronto para descubrir
-      todo lo que tenemos preparado para ti.
-    </p>
-
-    <div class="progress" role="progressbar" aria-label="Sitio en construcción">
-      <div class="progress-bar"></div>
-    </div>
-  </div>
+<main id="contenido" class="contenido">
+  <router-outlet></router-outlet>
 </main>
+
+<app-footer></app-footer>
+
+@if (mostrarFloat()) {
+  <app-whatsapp-float></app-whatsapp-float>
+}
