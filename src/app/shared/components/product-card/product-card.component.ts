@@ -7,21 +7,16 @@ import {
 import { RouterLink } from '@angular/router';
 
 import { Producto } from '../../../core/models/producto';
-import {
-  TIPOS_VELA_POR_ID
-} from '../../../core/data/tipos-vela';
-import { enlaceWhatsAppProducto } from '../../../core/config/site.config';
 import { PrecioPipe } from '../../../core/pipes/precio.pipe';
 import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.component';
 
 /**
  * Tarjeta de producto del catalogo.
  *
- * - Imagen real si `producto.imagenes` tiene rutas,
- *   placeholder degradado si no.
- * - Toda la tarjeta enlaza al detalle del producto.
- * - El boton "Consultar" abre WhatsApp con el mensaje
- *   del producto pre-cargado (no hay carrito).
+ * - Foto con nombre y precio debajo.
+ * - Icono de ojo sobre la imagen: siempre visible en
+ *   movil, aparece al hover en escritorio.
+ * - La imagen y el nombre enlanzan al detalle.
  */
 @Component({
   selector: 'app-product-card',
@@ -43,38 +38,35 @@ import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.comp
         } @else {
           <app-placeholder-img [alt]="producto().nombre" aspecto="4 / 5" />
         }
+
         @if (etiqueta()) {
           <span class="card__badge">{{ etiqueta() }}</span>
         }
+
+        <span class="card__ojo" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </span>
       </a>
 
       <div class="card__body">
-        <span class="card__tipo">{{ tipoNombre() }}</span>
-
         <h3 class="card__nombre">
           <a [routerLink]="['/producto', producto().id]">
             {{ producto().nombre }}
           </a>
         </h3>
 
-        <p class="card__meta">{{ producto().material }}</p>
-
         <p class="card__precio">
-          <span class="card__precio-label">Desde</span>
           {{ producto().precio | precio }}
         </p>
-
-        <a
-          class="card__cta"
-          [href]="enlace()"
-          target="_blank"
-          rel="noopener noreferrer">
-          Consultar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14" />
-            <path d="M12 5l7 7-7 7" />
-          </svg>
-        </a>
       </div>
     </article>
   `,
@@ -100,7 +92,6 @@ import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.comp
       position: relative;
       display: block;
       overflow: hidden;
-      border-radius: 0;
 
       img {
         width: 100%;
@@ -118,6 +109,7 @@ import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.comp
       position: absolute;
       top: 0.75rem;
       left: 0.75rem;
+      z-index: 1;
       padding: 0.25rem 0.7rem;
       font-size: 0.6875rem;
       font-weight: 500;
@@ -128,24 +120,33 @@ import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.comp
       border-radius: var(--radio-pill, 999px);
     }
 
+    .card__ojo {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(31, 45, 51, 0.28);
+      opacity: 1;
+      transition: opacity 200ms ease;
+
+      svg {
+        width: 36px;
+        height: 36px;
+        color: #fff;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+      }
+    }
+
     .card__body {
       display: flex;
       flex-direction: column;
       flex: 1;
-      gap: 0.35rem;
-      padding: 1.1rem 1.15rem 1.25rem;
-    }
-
-    .card__tipo {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--dorado);
+      gap: 0.3rem;
+      padding: 1rem 1.1rem 1.15rem;
     }
 
     .card__nombre {
-      font-family: var(--serif, "Cormorant Garamond", Georgia, serif);
+      font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
       font-size: 1.35rem;
       font-weight: 500;
       line-height: 1.15;
@@ -160,56 +161,22 @@ import { PlaceholderImgComponent } from '../placeholder-img/placeholder-img.comp
       }
     }
 
-    .card__meta {
-      font-size: 0.875rem;
-      color: var(--texto-suave);
-    }
-
     .card__precio {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      margin-top: 0.25rem;
+      margin-top: auto;
       font-size: 1.125rem;
       font-weight: 500;
       color: var(--dorado);
       letter-spacing: 0.02em;
     }
 
-    .card__precio-label {
-      font-size: 0.6875rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--texto-tenue);
-    }
-
-    .card__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: auto;
-      padding-top: 0.85rem;
-      min-height: 44px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--azul-oscuro);
-      transition: color 160ms ease;
-
-      svg {
-        width: 16px;
-        height: 16px;
-        transition: transform 160ms ease;
+    @media (hover: hover) and (pointer: fine) {
+      .card__ojo {
+        opacity: 0;
       }
 
-      &:hover {
-        color: var(--dorado);
-
-        svg {
-          transform: translateX(3px);
-        }
+      .card__media:hover .card__ojo,
+      .card__media:focus-visible .card__ojo {
+        opacity: 1;
       }
     }
   `
@@ -226,13 +193,4 @@ export class ProductCardComponent {
     }
     return '';
   });
-
-  protected readonly tipoNombre = computed<string>(() => {
-    const tipo = TIPOS_VELA_POR_ID.get(this.producto().tipo);
-    return tipo ? tipo.nombre : '';
-  });
-
-  protected readonly enlace = computed<string>(() =>
-    enlaceWhatsAppProducto(this.producto().nombre, this.producto().id)
-  );
 }

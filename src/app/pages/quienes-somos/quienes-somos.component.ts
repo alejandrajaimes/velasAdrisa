@@ -46,21 +46,24 @@ protected readonly valores = [
   protected readonly equipo = [
     {
       nombre: 'Melany Montoya',
-      rol: 'Fundadora y directora creativa',
+      rol: 'FUNDADORA · DIRECCIÓN Y PRODUCCIÓN',
+      foto: 'Melany.jpeg',
       texto:
-        'Impulsa la selección de piezas y el lenguaje visual de Adrisa.'
+        'Es la experiencia que da vida a nuestras ideas. Aporta su conocimiento artesanal, nos guía en cada proceso y lidera la selección de insumos para cuidar la calidad de cada creación.'
     },
     {
       nombre: 'Dania Contreras',
-      rol: 'Asesora de interiorismo',
+      rol: 'DIRECCIÓN CREATIVA Y DISEÑO',
+      foto: 'DANIA.jpg',
       texto:
-        'Ayuda a cada cliente a combinar piezas según su espacio y presupuesto.'
+        'Transforma ideas en experiencias visuales únicas. Su creatividad, sensibilidad estética y atención al detalle dan vida a cada diseño, creando piezas visuales que transmiten la esencia de Adrisa y convierten cada creación en algo verdaderamente especial.'
     },
     {
       nombre: 'Alejandra Jaimes',
-      rol: 'Coordinación de talleres',
+      rol: 'DIRECCIÓN DIGITAL Y TECNOLOGÍA',
+      foto: 'Alejandra2.jpeg',
       texto:
-        'Vela por la calidad y los tiempos de cada producción artesanal.'
+        'Impulsa la evolución digital de Adrisa a través de nuestra página web, herramientas administrativas y soluciones tecnológicas que acompañan el crecimiento de la marca.'
     }
   ];
 }

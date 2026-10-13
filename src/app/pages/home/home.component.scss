@@ -131,21 +131,23 @@
 }
 
 // ============ CATEGORÍAS ============
-// Scroll horizontal con snap en celular: un icono de 72px
-// se ve bien, uno de 140px en dos columnas se ve diminuto.
+// En celular las 3 categorías caben en una fila (1fr cada una).
+// El mínimo por columna deja el track scrolleable si en el
+// futuro se agregan más líneas sin que se achiquen demasiado.
 .cats {
-  // Sangrado lateral para que el track llegue al borde
-  // de la pantalla sin que el contenedor lo recorte.
   margin-top: -0.5rem;
 }
 
 .cats__track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(128px, 40vw);
+  grid-auto-columns: minmax(100px, 1fr);
   gap: 0.85rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  // Sin esto, el snap alinea el primer item al borde del
+  // scrollport y "se come" el gutter izquierdo.
+  scroll-padding-inline: var(--gutter);
   overscroll-behavior-inline: contain;
   scrollbar-width: none;
   padding: 0.5rem var(--gutter) 1rem;

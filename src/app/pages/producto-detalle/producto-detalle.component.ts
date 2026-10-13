@@ -38,6 +38,7 @@ import {
 export class ProductoDetalleComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly producto = signal<Producto | undefined>(undefined);
+  private readonly imagenActiva = signal(0);
 
   protected readonly existe = computed(() => this.producto() !== undefined);
 
@@ -56,6 +57,11 @@ export class ProductoDetalleComponent {
   protected readonly imagenes = computed(
     () => this.producto()?.imagenes ?? []
   );
+  protected readonly imagenPrincipal = computed(() => {
+    const imgs = this.imagenes();
+    return imgs.length > 0 ? imgs[this.imagenActiva()] : '';
+  });
+  protected readonly indiceActivo = this.imagenActiva.asReadonly();
   protected readonly tipoNombre = computed(() => {
     const id = this.producto()?.tipo;
     return id ? TIPOS_VELA_POR_ID.get(id)?.nombre ?? '' : '';
@@ -79,10 +85,15 @@ export class ProductoDetalleComponent {
 
         if (encontrado) {
           this.producto.set(encontrado);
+          this.imagenActiva.set(0);
         } else {
           this.producto.set(undefined);
           this.router.navigate(['/catalogo'], { replaceUrl: true });
         }
       });
+  }
+
+  seleccionarImagen(indice: number): void {
+    this.imagenActiva.set(indice);
   }
 }

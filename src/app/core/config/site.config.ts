@@ -42,14 +42,14 @@ export const SITE_CONFIG = {
   // TODO: PROVISIONAL — reemplazar por las direcciones reales
   sucursales: [
     {
-      ciudad: 'Santa Marta',
-      direccion: 'Mz Q casa 8, Urbanización Cantilito',
+      ciudad: 'Bogotá',
+      direccion: 'Carrera 90a #76a-18, Engativa',
       celular: '3182445257',
       horario: 'Lunes a sabado, 9:00 a.m. - 6:00 p.m.'
     },
     {
-      ciudad: 'Bogotá',
-      direccion: 'Carrera 90a #76a-18, Engativa',
+      ciudad: 'Santa Marta',
+      direccion: 'Mz Q casa 8, Urbanización Cantilito',
       celular: '3182445257',
       horario: 'Lunes a sabado, 9:00 a.m. - 6:00 p.m.'
     }

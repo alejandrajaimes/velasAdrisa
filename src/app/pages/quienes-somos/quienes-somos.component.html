@@ -90,14 +90,19 @@
     <app-section-heading
       eyebrow="Nuestro equipo"
       titulo="Quienes lo hacen posible"
-      subtitulo="Un gran equipo que atiende cada pedido como si fuera unico."
+      subtitulo="Un gran equipo donde la experiencia, la creatividad y la tecnología se unen para atender cada pedido como si fuera único, dando vida a cada detalle de Adrisa con dedicación y esencia propia."
+      
       [centro]="true" />
 
     <div class="grid equipo">
       @for (p of equipo; track p.nombre) {
         <article class="persona">
           <div class="persona__avatar">
-            <app-placeholder-img [alt]="p.nombre" aspecto="1 / 1" />
+            @if (p.foto) {
+              <img [src]="p.foto" [alt]="p.nombre" />
+            } @else {
+              <app-placeholder-img [alt]="p.nombre" aspecto="1 / 1" />
+            }
           </div>
           <h3 class="persona__nombre">{{ p.nombre }}</h3>
           <p class="persona__rol">{{ p.rol }}</p>

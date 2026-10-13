@@ -45,15 +45,15 @@ export class ExperienciaComponent {
   protected readonly hitos = [
     {
       anio: String(this.fundacion),
-      titulo: 'El primer taller',
+      titulo: 'El primer taller en Bogotá',
       texto:
-        'Adrisa comienza seleccionando velas hechas a mano para hogares de Santa Marta, con un catálogo pequeño y mucho cuidado en cada elección.'
+        'Adrisa abre su primer taller en Bogotá, seleccionando velas hechas a mano con un catálogo pequeño y mucho cuidado en cada elección. Desde ahí empezamos a enviar a todo el país.'
     },
     {
-      anio: '2021',
-      titulo: 'Bogotá y el envío nacional',
+      anio: '2022',
+      titulo: 'El segundo taller en Santa Marta',
       texto:
-        'Abrimos una segunda ciudad y empezamos a enviar a todo el país, con empaques pensados para que cada pieza llegue intacta.'
+        'Abrimos un segundo taller en Santa Marta para atender también el caribe y seguir enviando a todo el país, con empaques pensados para que cada pieza llegue intacta.'
     },
     {
       anio: '2023',

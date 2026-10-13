@@ -13,12 +13,25 @@
         <!-- Galeria -->
         <div class="galeria">
           @if (imagenes().length > 0) {
+            <div class="galeria__thumbs">
+              @for (img of imagenes(); track $index) {
+                <button
+                  type="button"
+                  class="galeria__thumb"
+                  [class.is-active]="indiceActivo() === $index"
+                  [attr.aria-label]="'Ver imagen ' + ($index + 1)"
+                  (click)="seleccionarImagen($index)">
+                  <img [src]="img" [alt]="nombre()" loading="lazy" />
+                </button>
+              }
+            </div>
+
             <img
               class="galeria__principal"
-              [src]="imagenes()[0]"
+              [src]="imagenPrincipal()"
               [alt]="nombre()"
               width="800"
-              height="1000" />
+              height="500" />
           } @else {
             <div class="galeria__placeholder">
               <app-placeholder-img
