@@ -23,20 +23,18 @@ export const SITE_CONFIG = {
   nombre: 'Adrisa',
   eslogan: 'Velas  Aromáticas para tu hogar',
 
-  // TODO: PROVISIONAL — reemplazar por el numero real (formato internacional, sin + ni espacios)
-  whatsapp: '573001234567',
+  whatsapp: '573182445257',
   whatsappTextoPorDefecto: 'Hola! Me gustaria recibir mas informacion sobre los productos de Adrisa.',
 
-  // TODO: PROVISIONAL — reemplazar por las cuentas reales
   redes: [
     {
       nombre: 'Instagram',
-      url: 'https://instagram.com/',
+      url: 'https://www.instagram.com/adrisa.velas.aromaticas/',
       icono: 'instagram'
     },
     {
       nombre: 'Facebook',
-      url: 'https://facebook.com/',
+      url: 'https://www.facebook.com/profile.php?id=61563832183210',
       icono: 'facebook'
     }
   ] as readonly EnlaceSocial[],
@@ -45,14 +43,14 @@ export const SITE_CONFIG = {
   sucursales: [
     {
       ciudad: 'Santa Marta',
-      direccion: 'Carrera 4 # 23 - 49',
-      celular: '3001234567',
+      direccion: 'Mz Q casa 8, Urbanización Cantilito',
+      celular: '3182445257',
       horario: 'Lunes a sabado, 9:00 a.m. - 6:00 p.m.'
     },
     {
       ciudad: 'Bogotá',
-      direccion: 'Carrera 11 # 93 - 53',
-      celular: '3007654321',
+      direccion: 'Carrera 90a #76a-18, Engativa',
+      celular: '3182445257',
       horario: 'Lunes a sabado, 9:00 a.m. - 6:00 p.m.'
     }
   ] as readonly Sucursal[],
