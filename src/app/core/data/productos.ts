@@ -42,17 +42,17 @@ export const PRODUCTOS: readonly Producto[] = [
     stock: true
   },
   {
-    id: 'vela-memorial-angel',
-    nombre: 'Vela Memorial Ángel',
+    id: 'kit-vela-arbol',
+    nombre: 'Kit Vela Árbol de Navidad',
     precio: 52000,
     descripcion:
-      'Vela memorial en figura de ángel, elaborada en cera blanca. Un homenaje delicado para honrar la memoria de tus seres queridos.',
+      'Vela memorial en figura de árbol de navidad, elaborada en cera blanca. Un homenaje delicado para honrar la memoria de tus seres queridos.',
     tipo: 'recordatorio',
     material: 'Cera de parafina premium, mecha de algodón',
     medidas: 'Alto 15 cm x Ancho 10 cm',
     imagenes: [
-      'productos/vela-6.jpg',
-      'productos/vela-1.jpg'
+      'productos/kit-vela-arbol.jpeg',
+      'productos/velas-copo-arbol.jpeg'
     ],
     destacado: false,
     stock: true
@@ -91,18 +91,17 @@ export const PRODUCTOS: readonly Producto[] = [
     stock: false
   },
   {
-    id: 'vela-memorial-roja',
-    nombre: 'Vela Memorial Roja',
-    precio: 48000,
+    id: 'kit-vela-copo',
+    nombre: 'Kit Vela Copo de Nieve',
+    precio: 45000,
     descripcion:
-      'Vela memorial en color rojo con acabado elegante. Diseñada para altares y momentos de recuerdo con especial reverencia.',
+      'Vela memorial en figura de copo de nieve, elaborada en cera blanca. Un homenaje delicado para honrar la memoria de tus seres queridos.',
     tipo: 'recordatorio',
     material: 'Cera de parafina premium, mecha de algodón',
     medidas: 'Alto 18 cm x Diametro 7 cm',
     imagenes: [
-      'productos/vela-4.jpg',
-      'productos/vela-5.jpg',
-      'productos/vela-6.jpg'
+      'productos/Kit-vela-copo.jpeg',
+      'productos/velas-copo-arbol.jpeg'
     ],
     destacado: false,
     stock: true

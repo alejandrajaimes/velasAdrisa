@@ -9,7 +9,7 @@
     </h1>
     <p class="hero__lead t-lead">
       Velas hechas a mano para darle calidez, aroma y luz a
-      cada rincón de tu casa.
+      cada rincón de tu hogar.
     </p>
 
     <div class="hero__acciones">
@@ -51,10 +51,13 @@
           class="cat"
           routerLink="/catalogo"
           [queryParams]="{ tipo: tipo.id }">
-          <span class="cat__marca" aria-hidden="true">
-            <app-placeholder-img
+          <span class="cat__marca">
+            <img
+              [src]="tipo.imagen"
               [alt]="tipo.nombre"
-              aspecto="1 / 1" />
+              width="400"
+              height="400"
+              loading="lazy" />
           </span>
           <span class="cat__nombre">{{ tipo.nombre }}</span>
         </a>
@@ -63,7 +66,7 @@
   </div>
 </section>
 
-<!-- ============ DESTACADOS ============ -->
+<!-- ============ DESTACADOS ============ 
 <section class="section">
   <div class="container">
     <div class="dest-head">
@@ -103,7 +106,7 @@
     }
   </div>
 </section>
-
+-->
 <!-- ============ MANIFIESTO ============ -->
 <section class="section section--azul-claro">
   <div class="container split split--texto-izq">
@@ -153,7 +156,7 @@
   </div>
 </section>
 
-<!-- ============ GALERÍA ============ -->
+<!-- ============ GALERÍA ============ 
 <section class="section">
   <div class="container">
     <app-section-heading
@@ -173,7 +176,7 @@
     </div>
   </div>
 </section>
-
+-->
 <!-- ============ BANDA CTA ============ -->
 <section class="section section--azul">
   <div class="container cta">

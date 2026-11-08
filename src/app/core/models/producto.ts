@@ -21,4 +21,6 @@ export interface TipoVela {
   readonly id: string;
   readonly nombre: string;
   readonly descripcion: string;
+  /** Ruta de imagen dentro de public/. Vacio = se muestra placeholder. */
+  readonly imagen: string;
 }

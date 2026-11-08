@@ -131,9 +131,9 @@
 }
 
 // ============ CATEGORÍAS ============
-// En celular las 3 categorías caben en una fila (1fr cada una).
-// El mínimo por columna deja el track scrolleable si en el
-// futuro se agregan más líneas sin que se achiquen demasiado.
+// En celular es un carrusel táctil: las tarjetas son grandes
+// (62vw) para que la imagen se luzca y la siguiente asome un
+// poco, invitando a deslizar. Desde tablet las 3 entran en fila.
 .cats {
   margin-top: -0.5rem;
 }
@@ -141,8 +141,8 @@
 .cats__track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(100px, 1fr);
-  gap: 0.85rem;
+  grid-auto-columns: clamp(9.5rem, 62vw, 18rem);
+  gap: clamp(0.75rem, 3vw, 1rem);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   // Sin esto, el snap alinea el primer item al borde del
@@ -150,7 +150,8 @@
   scroll-padding-inline: var(--gutter);
   overscroll-behavior-inline: contain;
   scrollbar-width: none;
-  padding: 0.5rem var(--gutter) 1rem;
+  -ms-overflow-style: none;
+  padding: 0.5rem var(--gutter) 1.25rem;
 
   &::-webkit-scrollbar {
     display: none;
@@ -159,11 +160,15 @@
 
 .cat {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.75rem;
+  align-content: start;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   text-align: center;
   text-decoration: none;
   color: var(--texto);
+  // Toda la tarjeta es zona táctil cómoda en móvil.
+  -webkit-tap-highlight-color: transparent;
 
   &__marca {
     display: block;
@@ -171,21 +176,32 @@
     border-radius: var(--radio-lg);
     box-shadow: var(--sombra-sm);
     transition: transform 220ms ease, box-shadow 220ms ease;
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
   }
 
   &__nombre {
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: clamp(1.05rem, 4vw, 1.25rem);
     font-weight: 500;
+    line-height: 1.25;
+    text-wrap: balance;
     transition: color 180ms ease;
   }
 
-  &:hover .cat__marca {
+  &:hover .cat__marca,
+  &:focus-visible .cat__marca {
     transform: translateY(-4px);
     box-shadow: var(--sombra);
   }
 
-  &:hover .cat__nombre {
+  &:hover .cat__nombre,
+  &:focus-visible .cat__nombre {
     color: var(--azul-oscuro);
   }
 }
@@ -287,7 +303,9 @@
   }
 
   .cats__track {
-    grid-auto-columns: minmax(150px, 22vw);
+    // Desde tablet las 3 categorías se reparten el ancho
+    // disponible en partes iguales.
+    grid-auto-columns: minmax(160px, 1fr);
   }
 
   .espera {
